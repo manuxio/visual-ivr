@@ -11,12 +11,12 @@ const makeConcatString = (s, len = 10) => {
   // CONCAT('VO2JE',CHAR(X'00'),CHAR(X'00'),CHAR(X'00'),CHAR(X'00'),CHAR(X'00'))
 }
 
-router.get('/:code', (req, res, next) => {
+router.get('/:code?', (req, res, next) => {
   // console.log('Rq.params', (new RegExp('^([0-9a-zA-Z]{,7})$')).test(req.params.code));
-  if ((new RegExp('^([0-9a-zA-Z]{5,7})$')).test(req.params.code)) {
+  if ((new RegExp('^([0-9a-zA-Z]{5,7})$')).test(req.params.code) || req.query && req.query.code) {
     const {
       code
-    } = req.params;
+    } = req.params.code ? req.params : req.query;
     req.session.regenerate(() => {
       req.session.domain = 'default';
       const sql = `SELECT * FROM pagamento_online_idcontratto_cf WHERE active = 1 AND codice_da_url = ${makeConcatString(req.dbConnection.escape(code))}`;
