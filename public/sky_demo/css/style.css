@@ -1,0 +1,36 @@
+body {
+  padding-top: 5rem;
+  background-color: #e6e6e6;
+  padding-bottom: 50px;
+}
+.bar-color {
+  background-color: white;
+}
+.navbar-brand IMG {
+  height: 30px;
+}
+.starter-template {
+  padding: 0.3rem;
+  text-align: center;
+}
+a {
+    color: rgb(62, 78, 117) !important;
+}
+a:focus, a:hover {
+    color: rgb(62, 78, 117) !important;
+}
+.form-control {
+    padding: .5rem .75rem;
+    padding-top: 0.5rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+}
+.list-group-item a,
+.mb-0 a {
+  display: block;
+  width: 100%;
+}
+.list-group-item a {
+  font-size: 1.2rem;
+}

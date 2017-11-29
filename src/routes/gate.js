@@ -349,10 +349,10 @@ router.get('/', (req, res, next) => {
             }
             const idcliente = record.idcliente;
             return new Promise((resolve) => {
-              fs.stat(`./validDomains/${idcliente}`, (err, stats) => {
+              fs.readFile(`./validDomains/${idcliente}`, (err, value) => {
                 // console.log('Stats', err, stats);
-                if (!err) {
-                  req.session.domain = idcliente;
+                if (!err && value.toString().length > 0) {
+                  req.session.domain = value.toString().trim();
                 } else {
                   console.warn(`[invalid domain] Unable to validate domain for idcliente ${idcliente}`);
                 }

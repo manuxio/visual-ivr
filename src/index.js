@@ -124,6 +124,7 @@ const startUpFunction = (worker) => {
   });
   app.use((req, res, next) => {
     if (req && req.session && req.session.domain && req.session.domain.length > 0) {
+      // console.info('Static content will be served from', `./public/${req.session.domain}`);
       const serveStatic = serveStaticRoute(`./public/${req.session.domain}`);
       serveStatic(req, res, next);
       // if (fs.existsSync(`./public/${req.session.domain}`)) {
