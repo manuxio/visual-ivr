@@ -138,7 +138,7 @@ const startUpFunction = (worker) => {
 
   app.use(express.static('./public/default'));
 
-  const logDirectory = path.join(__dirname, 'logs');
+  const logDirectory = './logs/';
   fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
   var accessLogStream = rfs('access.log', {
     interval: '1d', // rotate daily
