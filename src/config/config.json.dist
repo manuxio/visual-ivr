@@ -1,0 +1,9 @@
+{
+  "dbConnectionLimit": 2,
+  "dbHost": "127.0.0.1",
+  "dbUser": "****",
+  "dbPassword": "*****",
+  "dbName": "*****",
+  "httpPort": 4000,
+  "logTable": "online_payment_logs"
+}
