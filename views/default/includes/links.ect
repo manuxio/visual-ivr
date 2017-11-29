@@ -1,0 +1,7 @@
+<ul class="list-group list-group-flush">
+  <% if @anagraficaEnabled : %><li class="list-group-item"><a href="/vivr/anagrafica"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Anagrafica</a></li><% end %>
+  <% if @informazioniMandatoEnabled : %><li class="list-group-item"><a href="/vivr/informazionimandato"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Posizione debitoria</a></li><% end %>
+  <% if @payNowEnabled : %><li class="list-group-item"><a href="/vivr/pagaora"><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp;Paga ora</a></li><% end %>
+  <% if @contactEnabled : %><li class="list-group-item"><a href="/vivr/sendmessage"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contattaci</a></li><% end %>
+  <% if @homeEnabled : %><li class="list-group-item"><a href="/vivr/home"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Torna alla home</a></li><% end %>
+</ul>

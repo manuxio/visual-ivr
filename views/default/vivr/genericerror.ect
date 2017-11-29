@@ -1,0 +1,12 @@
+<% extend @domain + '/layouts/base.ect' %>
+<div style="text-align: left">
+  <div class="card" style="">
+    <div class="card-block">
+      <h3 class="card-title" style="text-align: center"><%- @title %></h3>
+      <p class="card-text">
+        <div><%- @body %></div>
+      </p>
+    </div>
+    <%- include @domain + "/includes/links.ect" %>
+  </div>
+</div>

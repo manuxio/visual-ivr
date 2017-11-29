@@ -1,0 +1,29 @@
+body {
+  padding-top: 4rem;
+  background-color: #3c3c3c;
+}
+.starter-template {
+  padding: 0.3rem;
+  text-align: center;
+}
+a {
+    color: #3498db;
+}
+.form-control {
+    padding: .5rem .75rem;
+    padding-top: 0.5rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+}
+.list-group-item a,
+.mb-0 a {
+  display: block;
+  width: 100%;
+}
+.list-group-item a {
+  font-size: 1.2rem;
+}
+body {
+  padding-bottom: 50px;
+}

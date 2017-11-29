@@ -1,0 +1,37 @@
+<% extend @domain + '/layouts/base.ect' %>
+<div style="text-align: left">
+  <div class="card" style="">
+    <div class="card-block ">
+      <% if @transactionResult.status == 'APPROVED' : %>
+      <h3 class="card-title" style="text-align: center">Transazione conclusa con successo</h3>
+      <div>
+        Grazie di aver proceduto con il pagamento.<br />
+        La transazione ha avuto esito positivo e sar&agrave; contabilizzata nella tua posizione a breve.<br />
+      </div>
+      <% end %>
+      <% if @transactionResult.status == 'PENDING' : %>
+      <h3 class="card-title" style="text-align: center">Transazione in attesa</h3>
+      <div>
+        Grazie di aver proceduto con il pagamento.<br />
+        La transazione &egrave; in fase di elaborazione da parte del gestore del pagamento. Una volta verificato il buon esito dell'operazione, la transazione sar&agrave; contabilizzata nella tua posizione.<br />
+      </div>
+      <% end %>
+      <% if @transactionResult.status == 'NOT APPROVED' : %>
+      <h3 class="card-title" style="text-align: center">Transazione fallita</h3>
+      <div>
+        Purtroppo la transazione non ha avuto buon fine.
+        La risposta ricevuta dal sistema di pagamento &egrave;:
+        <div style="margin-top: 5px" class="alert alert-warning"><%- @transactionResult.remotestatus %></div>
+        Ti preghiamo di provare nuovamente ad eseguire il pagamento online, oppure ti invitiamo a contattarci in caso di problemi con l'utilizzo di questo servizio.
+      </div>
+      <% end %>
+    </div>
+    <ul class="list-group list-group-flush">
+      <% if @anagraficaEnabled : %>
+        <li class="list-group-item"><a href="/vivr/anagrafica"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;Visualizza anagrafica</a></li>
+      <% end %>
+      <% if @informazioniMandatoEnabled : %><li class="list-group-item"><a href="/vivr/informazionimandato"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Posizione debitoria</a></li><% end %>
+      <% if @payNowEnabled : %><li class="list-group-item"><a href="/vivr/pagaora"><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp;Paga online</a></li><% end %>
+    </ul>
+  </div>
+</div>

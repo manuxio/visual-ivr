@@ -1,0 +1,21 @@
+<% extend '_stats/layouts/base.ect' %>
+<div style="text-align: left">
+  <div class="card" style="">
+    <div class="card-block">
+      <div class="alert alert-info" role="alert">
+        VIVR - Stats
+      </div>
+      <form method="POST">
+        <div class="form-group">
+          <label for="mandato">Inserici il codice cliente</label>
+          <input type="string" class="form-control" id="cliente" placeholder="" name="cliente">
+        </div>
+        <div class="form-group">
+          <label for="mandato">Inserisci il numero del mandato</label>
+          <input type="string" class="form-control" id="mandato" placeholder="" name="mandato">
+        </div>
+        <button type="submit" class="btn btn-primary">Apri</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<% extend @domain + '/layouts/base.ect' %>
+<div style="text-align: left">
+  <div class="card" style="">
+    <div class="card-block">
+      <h3 class="card-title" style="text-align: center">Pagamento online</h3>
+      <p class="card-text">
+        Il pagamento online della somma di <strong><%- @formatCurrency(@dbRecord.importo, { format: '%s%v', symbol: '&euro; ', locale: 'it-IT' }) %></strong> avverr&agrave; attraverso il server sicuro gestito dall'istituto bancario <strong>BNL - GRUPPO BNP PARIBAS</strong>.<br />
+        La connessione al sito della banca sar&agrave; criptata e l'identit&agrave; del server &egrave; garantita dal certificato che il tuo programma di navigazione ti mostrer&agrave; accanto all'indirizzo web.<br />
+        Per procedere al pagamento, clicca sul pulsante qui in basso.<br />
+        <form action="<%- @gateWay %>" method="POST">
+          <input type="hidden" name="txntype" value="<%- @txntype %>">
+          <input type="hidden" name="timezone" value="<%- @timezone %>">
+          <input type="hidden" name="txndatetime" value="<%- @txndatetime %>">
+          <input type="hidden" name="hash" value="<%- @hash %>">
+          <input type="hidden" name="storename" value="<%- @storename %>">
+          <input type="hidden" name="mode" value="<%- @mode %>">
+          <input type="hidden" name="currency" value="<%- @currency %>">
+          <input type="hidden" name="language" value="<%- @language %>">
+          <input type="hidden" name="oid" value="<%- @oid %>">
+          <input type="hidden" name="addInfo3" value="<%- @addInfo3 %>'">
+          <input type="hidden" name="responseSuccessURL" value="<%- @responseSuccessURL %>">
+          <input type="hidden" name="responseFailURL" value="<%- @responseSuccessURL %>">
+          <input type="hidden" name="chargetotal" value="<%- @amount %>">
+          <div class="form-group row">
+            <button type="submit" class="btn btn-primary">Procedi con il pagamento</button>
+          </div>
+        </form>
+      </p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><a href="/vivr/home"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Torna alla schermata iniziale</a></li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<% extend @domain + '/layouts/base.ect' %>
+<div style="text-align: left">
+  <div class="card" style="">
+    <div class="card-block">
+      <h3 class="card-title" style="text-align: center">Pagamento gi&agrave; eseguito</h3>
+      <p class="card-text">
+        <div class="alert alert-success">Dai nostri sistemi risulta gi&agrave; eseguito un pagamento per questa posizione, <strong>pertanto non &egrave; possibile procedere ad un secondo pagamento</strong>.</div>
+        In caso di disguidi, i nostri operatori la ricontatteranno a breve.
+        <br />
+        Grazie.
+      </p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><a href="/vivr/showtransactions"><i class="fa fa-google-wallet" aria-hidden="true"></i>&nbsp;Lista pagamenti</a></li>
+      <li class="list-group-item"><a href="/vivr/home"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Torna alla schermata iniziale</a></li>
+    </ul>
+  </div>
+</div>

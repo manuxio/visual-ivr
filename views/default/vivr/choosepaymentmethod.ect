@@ -1,0 +1,41 @@
+<% extend 'layouts/base.ect' %>
+<div style="text-align: left">
+  <div class="card" style="">
+    <div class="card-block">
+      <h3 class="card-title text-center">Scegli il metodo di pagamento</h3>
+      <div style="margin-top: 10px; margin-bottom: 10px">
+        <% if @paymentMethods.length == 1 : %>
+        Per la tua posizione &egrave; disponibile un solo metodo di pagamento, ti preghiamo di cliccare sul pulsante corrispondente per proseguire.<br />
+        <% end %>
+        <% if @paymentMethods.length == 0 : %>
+        <div class="alert alert-danger">Siamo spiacenti, ma non sono disponibili metodi di pagamento.</div>
+        <% end %>
+        <% if @paymentMethods.length > 1 : %>
+        Per la tua posizione &egrave; possibile scegliere tra diversi metodi di pagamento. Clicca su quello che preferisci.<br/>
+        <b>Ti ricordiamo che alcuni metodi di pagamento possono prevedere delle spese di commissione</b>.<br/>
+        <% end %>
+      </div>
+      <div id="accordion" style="margin-bottom: 10px" role="tablist" aria-multiselectable="true">
+        <% for method in @paymentMethods : %>
+        <div class="card">
+          <div class="card-header" role="tab" id="heading<%- method.ID %>">
+            <h5 class="mb-0">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%- method.ID %>">
+                <%- method.getTitle() %>
+              </a>
+            </h5>
+          </div>
+
+          <div id="collapse<%- method.ID %>" class="collapse" role="tabpanel">
+            <div class="card-block">
+              <%- method.getIntro() %>
+              <%- method.getForm() %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <%- include "includes/links.ect" %>
+  </div>
+</div>

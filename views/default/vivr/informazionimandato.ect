@@ -1,0 +1,87 @@
+<% extend "layouts/base.ect" %>
+<div style="text-align: left">
+  <div class="card" style="">
+    <div class="card-block">
+      <% totaleResiduo = 0 %>
+      <% for importo in @fullDbRecords.importi : %>
+      <% totaleResiduo += importo.importoResiduo %>
+      <% end %>
+      <h3 class="card-title">POSIZIONE DEBITORIA</h3>
+      <dl class="row">
+        <dt class="col-md-3 col-sm-5">Creditore</dt>
+        <dd class="col-md-9 col-sm-7"><%- @dbRecord.nome_cliente %></dd>
+
+        <dt class="col-md-3 col-sm-5">Codice contratto</dt>
+        <dd class="col-md-9 col-sm-7"><%- @fullDbRecords.contratto.codiceContratto %></dd>
+        <dt class="col-md-3 col-sm-5">Residuo totale dovuto</dt>
+        <dd class="col-md-9 col-sm-7"><%- @formatCurrency(totaleResiduo, { format: '%s%v', symbol: '&euro; ', locale: 'it-IT' }) %></dd>
+      </dl>
+      <div style="margin-top: 10px; margin-bottom: 10px">
+        L'importo residuo di <%- @formatCurrency(totaleResiduo, { format: '%s%v', symbol: '&euro; ', locale: 'it-IT' }) %> &egrave; composto dalle voci che seguono.
+      </div>
+      <div id="accordion" style="margin-bottom: 10px" role="tablist" aria-multiselectable="true">
+        <% for importo in @fullDbRecords.importi : %>
+        <div class="card">
+          <div class="card-header" role="tab" id="heading<%- importo.IDImporto %>">
+            <h5 class="mb-0">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%- importo.IDImporto %>">
+                <%- importo.NomeImporto %>
+              </a>
+            </h5>
+          </div>
+
+          <div id="collapse<%- importo.IDImporto %>" class="collapse" role="tabpanel">
+            <div class="card-block">
+              <dl class="row">
+                <dt class="col-md-2 col-sm-5">Totale dovuto</dt>
+                <dd class="col-md-10 col-sm-7"><%- @formatCurrency(importo.affidato, { format: '%s%v', symbol: '&euro; ', locale: 'it-IT' }) %></dd>
+                <dt class="col-md-2 col-sm-5">Totale versato</dt>
+                <dd class="col-md-10 col-sm-7"><%- @formatCurrency(importo.recuperato, { format: '%s%v', symbol: '&euro; ', locale: 'it-IT' }) %></dd>
+                <dt class="col-md-2 col-sm-5">Totale residuo</dt>
+                <dd class="col-md-10 col-sm-7"><%- @formatCurrency(importo.importoResiduo, { format: '%s%v', symbol: '&euro; ', locale: 'it-IT' }) %></dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+
+      <% if @fullDbRecords.fatture && @fullDbRecords.fatture.length > 0 : %>
+      <div style="margin-top: 10px; margin-bottom: 10px">
+        La posizione debitoria fa riferimento ai documenti che seguono.
+      </div>
+
+      <div id="accordion2" style="margin-top: 10px" role="tablist" aria-multiselectable="true">
+        <% for fattura in @fullDbRecords.fatture : %>
+        <div class="card">
+          <div class="card-header" role="tab" id="heading<%- fattura.IDFATTURA %>">
+            <h5 class="mb-0">
+              <a data-toggle="collapse" data-parent="#accordion2" href="#collapse<%- fattura.IDFATTURA %>">
+                Fattura <%- fattura.NumFattura %>
+              </a>
+            </h5>
+          </div>
+
+          <div id="collapse<%- fattura.IDFATTURA %>" class="collapse" role="tabpanel">
+            <div class="card-block">
+              <dl class="row">
+                <dt class="col-md-2 col-sm-5">Identificativo del documento</dt>
+                <dd class="col-md-10 col-sm-7"><%- fattura.NumFattura %></dd>
+                <dt class="col-md-2 col-sm-5">Data documento</dt>
+                <dd class="col-md-10 col-sm-7"><%- @moment(fattura.datafattura).locale('it').format('LL') %></dd>
+                <dt class="col-md-2 col-sm-5">Data scadenza</dt>
+                <dd class="col-md-10 col-sm-7"><%- @moment(fattura.dataScadenza).locale('it').format('LL') %></dd>
+                <dt class="col-md-2 col-sm-5">Importo</dt>
+                <dd class="col-md-10 col-sm-7"><%- @formatCurrency(fattura.SaldoFattura, { format: '%s%v', symbol: '&euro; ', locale: 'it-IT' }) %></dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+
+      <% end %>
+    </div>
+    <%- include "includes/links.ect" %>
+  </div>
+</div>
