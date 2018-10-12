@@ -1,0 +1,104 @@
+<% extend '_stats/layouts/base.ect' %>
+<div style="text-align: left">
+  <div class="card" style="">
+    <div class="card-block">
+      <h3 class="card-title">Overview</h3>
+      <dl class="row">
+        <dt class="col-md-3 col-sm-5">Totale posizioni</dt>
+        <dd class="col-md-9 col-sm-7"><%- @totaleContratti %></dd>
+
+        <dt class="col-md-3 col-sm-5">Totale punti di accesso</dt>
+        <dd class="col-md-9 col-sm-7"><%- @totaleCodiciDaUrl %></dd>
+
+        <dt class="col-md-3 col-sm-5">Totale pratiche aperte</dt>
+        <dd class="col-md-9 col-sm-7"><%- @totalConsumedContratti %></dd>
+
+        <dt class="col-md-3 col-sm-5">Totale punti di accesso utilizzati</dt>
+        <dd class="col-md-9 col-sm-7"><%- @totalConsumedCodes %></dd>
+
+        <dt class="col-md-3 col-sm-5">Totale contratti con pagamenti approvati</dt>
+        <dd class="col-md-9 col-sm-7"><%- @totaleContrattiPagati %></dd>
+
+        <dt class="col-md-3 col-sm-5">Totale contratti con pagamenti non approvati</dt>
+        <dd class="col-md-9 col-sm-7"><%- @totaleContrattiNonPagati %></dd>
+
+        <dt class="col-md-3 col-sm-5">Totale link aperti da email</dt>
+        <dd class="col-md-9 col-sm-7"><%- @totalEmails %></dd>
+
+        <dt class="col-md-3 col-sm-5">Totale link aperti da cellulare</dt>
+        <dd class="col-md-9 col-sm-7"><%- @totalCellphones %></dd>
+      </dl>
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <div style="width:100%;">
+            <canvas id="openedContrattiChart"></canvas>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <div style="width:100%;">
+            <canvas id="approvedPaymentsChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+window.chartColors = {
+	red: 'rgb(255, 99, 132)',
+	orange: 'rgb(255, 159, 64)',
+	yellow: 'rgb(255, 205, 86)',
+	green: 'rgb(75, 192, 192)',
+	blue: 'rgb(54, 162, 235)',
+	purple: 'rgb(153, 102, 255)',
+	grey: 'rgb(201, 203, 207)'
+};
+var config = {
+  type: 'pie',
+  data: {
+    datasets: [{
+      data: [<%- @totaleContratti - @totalConsumedContratti %>, <%- @totalConsumedContratti %>],
+      backgroundColor: [
+        window.chartColors.red,
+        window.chartColors.orange,
+        window.chartColors.yellow,
+        window.chartColors.green,
+        window.chartColors.blue,
+      ],
+      label: 'Pratiche aperte'
+    }],
+    labels: [
+      "Non aperte",
+      "Aperte"
+    ]
+  },
+  options: {
+    responsive: true
+  }
+};
+new Chart('openedContrattiChart', config);
+var config = {
+  type: 'pie',
+  data: {
+    datasets: [{
+      data: [<%- @totaleContratti - @totaleContrattiPagati %>, <%- @totaleContrattiPagati %>],
+      backgroundColor: [
+        window.chartColors.red,
+        window.chartColors.orange,
+        window.chartColors.yellow,
+        window.chartColors.green,
+        window.chartColors.blue,
+      ],
+      label: 'Pratiche pagate'
+    }],
+    labels: [
+      "Non pagate",
+      "Pagate"
+    ]
+  },
+  options: {
+    responsive: true
+  }
+};
+new Chart('approvedPaymentsChart', config)
+</script>

@@ -4,13 +4,19 @@
     <div class="card-block">
       <h3 class="card-title text-center">Conferma identit&agrave;</h3>
       <div>
-        Prima di procedere con l'utilizzo di questo sito, &egrave; necessario che ci venga confermato che lei &egrave;
+        <% if @dbRecord.cf && @dbRecord.cf.length == 16 : %>
+          Prima di procedere con l'utilizzo di questo sito, &egrave; necessario che ci venga confermato che lei &egrave;
+        <% else : %>
+          Prima di procedere con l'utilizzo di questo sito, &egrave; necessario che ci venga confermato che lei &egrave; il legale rappresentante di
+        <% end %>
         <div class="alert alert-info text-center"><%- @fullDbRecords.anagrafica.Debitore %></div>
-        <form method="POST">
-          <input type="hidden" name="confirm" value="true" />
-          <button type="submit" class="btn btn-primary">S&igrave;, sono io</button>
-        </form>
-        <a class="btn btn-danger" href="/vivr/closesession">No, non sono io</a>
+        <div class="text-center">
+          <form method="POST" action="/requestfullname">
+            <input type="hidden" name="confirm" value="true" />
+            <button type="submit" class="btn btn-primary">S&igrave;, sono io</button>
+          </form>
+          <a class="btn btn-danger" href="/vivr/closesession">No, non sono io</a>
+        </div>
       </div>
     </div>
   </div>

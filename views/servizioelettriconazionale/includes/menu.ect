@@ -1,0 +1,8 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+  <!-- navbar for servizioelettriconazionale -->
+  <% if @title && (@title == 'Verifica dati' || @title == 'Uscita' || @title == 'Verifica identit&agrave;') :%>
+    <a class="navbar-brand" href="#"><img src="/images/logo.png" height="25" /></a>
+  <% else :%>
+    <a class="navbar-brand" href="/vivr/home"><img src="/images/logo.png" height="25" /></a>
+  <% end %>
+</nav>

@@ -1,0 +1,36 @@
+<% extend 'layouts/base.ect' %>
+<div style="text-align: left">
+  <div class="card" style="">
+    <div class="card-block ">
+      <h3 class="card-title" style="text-align: center">Invia copia del pagamento</h3>
+      <% if @formError : %>
+        <div class="alert alert-danger">
+          Si sono verificati i seguenti errori:
+          <%- @formError %>
+        </div>
+      <% end %>
+      <form action="/vivr/sendmessage" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="contactReason">Oggetto</label>
+          <select name="contactReason" class="form-control" id="contactReason">
+            <option value="Invio documentazione" selected="selected">Invio documentazione</option>
+          </select>
+        </div>
+        <div class="form-group" style="display: none">
+          <label for="contactMessage">Messaggio</label>
+          <textarea class="form-control" name="contactMessage" id="contactMessage" rows="6" style="display: none">Invio prova di pagamento</textarea>
+        </div>
+        <div class="form-group">
+          <label for="contactAttachment">Allegato - dimensione massima 500KB</label>
+          <input type="file" class="form-control-file" name="contactAttachment" id="contactAttachment" aria-describedby="fileHelp">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Invia documentazione</button>
+        </div>
+      </form>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><a href="/vivr/home"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Torna alla home</a></li>
+    </ul>
+  </div>
+</div>

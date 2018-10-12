@@ -1,5 +1,4 @@
 import baseMethod from './basemethod';
-import barcode from 'barcode';
 import JsBarcode from 'jsbarcode';
 import Canvas from 'canvas';
 import fs from 'fs';

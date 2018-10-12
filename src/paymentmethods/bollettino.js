@@ -1,5 +1,4 @@
 import baseMethod from './basemethod';
-import barcode from 'barcode';
 import JsBarcode from 'jsbarcode';
 import Canvas from 'canvas';
 import fs from 'fs';
@@ -486,7 +485,7 @@ export default class bollettinoMethod extends baseMethod {
           pdfConf.importoOCR = bollettinoMethod.leftPad(importoAsText.replace('.', '+'), 11);
           // 170000000760026335
           const annofattura = (new Date(fattura.datafattura)).getFullYear();
-          const tmpCodiceClienteClienteOcr = `${annofattura.toString().slice(-2)}888${bollettinoMethod.leftPad(nFattura.toString(), 11)}`;
+          const tmpCodiceClienteClienteOcr = `${annofattura.toString().slice(-2)}000${bollettinoMethod.leftPad(nFattura.toString(), 11)}`;
           const remainder = parseInt(tmpCodiceClienteClienteOcr, 10) % 93;
           pdfConf.codiceclienteOCR = `${tmpCodiceClienteClienteOcr}${remainder}`;
           //18170000000760026335120000142442551000000060913896
@@ -497,7 +496,7 @@ export default class bollettinoMethod extends baseMethod {
           pdfConf.importoOCR = bollettinoMethod.leftPad(importoAsText.replace('.', '+'), 11);
           // 170000000760026335
           const annofattura = (new Date(fattura.datafattura)).getFullYear();
-          const tmpCodiceClienteClienteOcr = `${annofattura.toString().slice(-2)}${bollettinoMethod.leftPad(nFattura.toString(), 14)}`;
+          const tmpCodiceClienteClienteOcr = `${annofattura.toString().slice(-2)}000${bollettinoMethod.leftPad(nFattura.toString(), 14)}`;
           const remainder = parseInt(tmpCodiceClienteClienteOcr, 10) % 93;
           pdfConf.codiceclienteOCR = `${tmpCodiceClienteClienteOcr}${remainder}`;
           //18170000000760026335120000142442551000000060913896
@@ -507,7 +506,17 @@ export default class bollettinoMethod extends baseMethod {
       }
       if (pdfConf.lisCodiceEmittente) {
         if (residenziale) {
-
+          const annofattura = (new Date(fattura.datafattura)).getFullYear();
+          const fatturalunga = bollettinoMethod.leftPad(nFattura, 10);
+          const annolungo = bollettinoMethod.leftPad(annofattura.toString(), 6);
+          const codiceContoTmp = `${annolungo}${fatturalunga}`;
+          const codiceContoAsNumber = parseInt(codiceContoTmp, 10);
+          const remainder = codiceContoAsNumber % 93;
+          const codiceConto = `${annolungo}${fatturalunga}${remainder}`;
+          pdfConf.lisCodiceConto = codiceConto;
+          pdfConf.lisImporto = importoAsText.replace('.', ',');
+          pdfConf.lisCode = `415${pdfConf.lisCodiceEmittente}8020${codiceConto}3902${bollettinoMethod.leftPad(importoAsText.replace('.', ''), 6)}`;
+          pdfConf.lisCodeText = `(415)${pdfConf.lisCodiceEmittente}(8020)${codiceConto}(3902)${bollettinoMethod.leftPad(importoAsText.replace('.', ''), 6)}`;
         } else {
           const annofattura = (new Date(fattura.datafattura)).getFullYear();
           const fatturalunga = bollettinoMethod.leftPad(nFattura, 10);

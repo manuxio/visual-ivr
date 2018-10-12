@@ -1,0 +1,71 @@
+/* default */
+body {
+  background-color: #f2f2f2!important;
+  padding-top: 80px;
+}
+.starter-template {
+  padding: 0.3rem;
+  text-align: center;
+}
+a {
+    color: #3498db;
+}
+.form-control {
+    padding: .5rem .75rem;
+    padding-top: 0.5rem;
+    padding-right: 0.75rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+}
+.list-group-item a,
+.mb-0 a {
+  display: block;
+  width: 100%;
+}
+.list-group-item a {
+  font-size: 1.2rem;
+}
+body {
+  padding-bottom: 50px;
+}
+
+.bg-inverse {
+    background-color: #009BBA!important;
+}
+
+.bg-inverse-footer {
+    background-color: #333334!important;
+    border-radius: 0px;
+}
+
+.btn-primary {
+    background-color: #3573b3;
+}
+
+.alert-info {
+    background-color: #f2f2f2;
+    border-color: #c3c3c3;
+    border-top-color: rgb(195, 195, 195);
+    border-right-color: rgb(195, 195, 195);
+    border-bottom-color: rgb(195, 195, 195);
+    border-left-color: rgb(195, 195, 195);
+    color: black;
+}
+
+.alert-warning {
+    background-color: #ffe665;
+    border-color: #faf2cc;
+    border-top-color: rgb(250, 242, 204);
+    border-right-color: rgb(250, 242, 204);
+    border-bottom-color: rgb(250, 242, 204);
+    border-left-color: rgb(250, 242, 204);
+    color: #8a6d3b;
+}
+
+.btn-danger {
+    background-color: #b33535;
+}
+
+.card-header h5 a {
+  color: #3573b3;
+}

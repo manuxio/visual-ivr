@@ -1,0 +1,10 @@
+{
+  "dbConnectionLimit": 5,
+  "dbHost": "10.161.9.152",
+  "dbUser": "node",
+  "dbPassword": "pdNode01!",
+  "dbName": "serfindb",
+  "httpPort": 3000,
+  "httpDevPort": 3000,
+  "logTable": "online_payment_logs"
+}

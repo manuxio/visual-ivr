@@ -18,7 +18,9 @@ router.get('/home', checkauth, (req, res, next) => {
     anagraficaEnabled: true,
     informazioniMandatoEnabled: true,
     payNowEnabled: true,
-    contactEnabled: true
+    contactEnabled: true,
+    viewEngines: req.viewEngines,
+    viewRoots: req.viewRoots
   }));
 });
 
@@ -28,12 +30,24 @@ router.get('/closesession', (req, res, next) => {
   } = req;
   // console.log('fullDbRecords', req.session.fullDbRecords);
   const domain = typeof session.domain !== 'undefined' ? session.domain : 'default';
-  req.session.regenerate(() => {
-    res.render(`vivr/logout`, Object.assign({}, req.baseParams, {
-      title: `Uscita`,
-      domain
-    }));
-  });
+  // req.session.regenerate(() => {
+    req.session.dbRecord = null;
+    req.session.code = null;
+    req.session.validCode = false;
+    req.session.askConfirmed = false;
+    req.session.fullnameConfirmed = false;
+    req.session.authenticated = false;
+    console.log('Closing session for address', req.ip, req.sessionID, req.originalUrl);
+    req.session.domain = domain;
+    req.session.save((saveError) => {
+      res.render(`vivr/logout`, Object.assign({}, req.baseParams, {
+        title: `Uscita`,
+        domain,
+        viewEngines: req.viewEngines,
+        viewRoots: req.viewRoots
+      }));
+    });
+  // });
 });
 
 router.get('/anagrafica', checkauth, (req, res, next) => {
@@ -47,7 +61,9 @@ router.get('/anagrafica', checkauth, (req, res, next) => {
     informazioniMandatoEnabled: true,
     payNowEnabled: true,
     contactEnabled: true,
-    homeEnabled: true
+    homeEnabled: true,
+    viewEngines: req.viewEngines,
+    viewRoots: req.viewRoots
   }));
 });
 
@@ -61,7 +77,9 @@ router.get('/informazionimandato', checkauth, (req, res, next) => {
     // informazioniMandatoEnabled: true,
     payNowEnabled: true,
     contactEnabled: true,
-    homeEnabled: true
+    homeEnabled: true,
+    viewEngines: req.viewEngines,
+    viewRoots: req.viewRoots
   }));
 });
 
@@ -81,6 +99,8 @@ router.get('/pagaora', checkauth, (req, res, next) => {
     return prev + curr.importoResiduo;
   }, 0);
   session.pendingChecks = 0;
+
+  // console.log('enabledPaymentMethods', enabledPaymentMethods);
 
   const realPaymentMethods = enabledPaymentMethods.map((c) => {
     if (!session.paymentMethodsConfigurations) {
@@ -104,6 +124,9 @@ router.get('/pagaora', checkauth, (req, res, next) => {
     return m;
   });
 
+  // console.log('realPaymentMethods', realPaymentMethods);
+
+
   req.dbConnection.query(`SELECT * FROM onlinePaymentTransactions WHERE paymentId = ${req.dbConnection.escape(dbRecord.id_pagamento_online)} AND completed = 1 AND (status = 'PENDING' OR status = 'APPROVED')`)
   .then(
     (results) => {
@@ -114,7 +137,9 @@ router.get('/pagaora', checkauth, (req, res, next) => {
           anagraficaEnabled: true,
           informazioniMandatoEnabled: true,
           contactEnabled: true,
-          homeEnabled: true
+          homeEnabled: true,
+          viewEngines: req.viewEngines,
+          viewRoots: req.viewRoots
         }));
       } else {
         const getReady = realPaymentMethods.map((pm) => {
@@ -132,6 +157,7 @@ router.get('/pagaora', checkauth, (req, res, next) => {
               cb(null);
             },
             (e) => {
+              console.log('E', e);
               cb(true);
             }
           );
@@ -144,7 +170,9 @@ router.get('/pagaora', checkauth, (req, res, next) => {
               anagraficaEnabled: true,
               informazioniMandatoEnabled: true,
               contactEnabled: true,
-              homeEnabled: true
+              homeEnabled: true,
+              viewEngines: req.viewEngines,
+              viewRoots: req.viewRoots
             }));
           } else {
             next(err);
@@ -181,7 +209,9 @@ router.get('/waittransactionresult', checkauth, (req, res, next) => {
             title: `Attendere...`,
             reloadTimeout: 5000,
             pendingChecks: session.pendingChecks,
-            listTransactionsUrl: '/vivr/showtransactions'
+            listTransactionsUrl: '/vivr/showtransactions',
+            viewEngines: req.viewEngines,
+            viewRoots: req.viewRoots
           }));
         } else {
           // console.log('transactionResult', transactionResult);
@@ -191,7 +221,9 @@ router.get('/waittransactionresult', checkauth, (req, res, next) => {
             listTransactionsUrl: '/vivr/showtransactions',
             anagraficaEnabled: true,
             informazioniMandatoEnabled: true,
-            payNowEnabled: true
+            payNowEnabled: true,
+            viewEngines: req.viewEngines,
+            viewRoots: req.viewRoots
           }));
         }
       }
@@ -227,7 +259,9 @@ router.get('/showtransactions', checkauth, (req, res, next) => {
         anagraficaEnabled: true,
         informazioniMandatoEnabled: true,
         contactEnabled: true,
-        homeEnabled: true
+        homeEnabled: true,
+        viewEngines: req.viewEngines,
+        viewRoots: req.viewRoots
       }));
     },
     (e) => {
@@ -246,7 +280,9 @@ router.get('/sendmessage', checkauth, (req, res, next) => {
     anagraficaEnabled: true,
     informazioniMandatoEnabled: true,
     payNowEnabled: true,
-    homeEnabled: true
+    homeEnabled: true,
+    viewEngines: req.viewEngines,
+    viewRoots: req.viewRoots
   }));
 });
 
@@ -286,7 +322,9 @@ router.post('/sendmessage', checkauth, (req, res, next) => {
       title: `Invia messaggio`,
       contactMessage,
       contactReason,
-      formError
+      formError,
+      viewEngines: req.viewEngines,
+      viewRoots: req.viewRoots
     }));
   } else {
     const file = files && files.contactAttachment ? files.contactAttachment : null;
@@ -295,25 +333,84 @@ router.post('/sendmessage', checkauth, (req, res, next) => {
     const filedata = file ? file.data : null;
 
     req.dbConnection
-    .query(`INSERT into onlineMessages (idcontratto, oggetto, messaggio, attachment, attachment_name, attachment_mimetype)
+    .query(`INSERT into onlineMessages (idcontratto, oggetto, messaggio, attachment, attachment_name, attachment_mimetype, tracking)
     VALUES (
       ${req.dbConnection.escape(contratto.IDContratto)},
       ${req.dbConnection.escape(contactReason)},
       ${req.dbConnection.escape(contactMessage)},
       ${req.dbConnection.escape(filedata)},
       ${req.dbConnection.escape(filename)},
-      ${req.dbConnection.escape(filemime)}
+      ${req.dbConnection.escape(filemime)},
+      ${req.dbConnection.escape(req.session.code)}
     )`)
     .then(
       (result) => {
         res.render(`vivr/messagesent`, Object.assign({}, req.baseParams, {
-          title: `Messaggio inviato correttamente`
+          title: `Messaggio inviato correttamente`,
+          viewEngines: req.viewEngines,
+          viewRoots: req.viewRoots
         }));
       },
       (e) => Promise.reject(e)
     )
 
   }
+});
+
+router.get('/splitpayment', checkauth, (req, res, next) => {
+  const {
+    session
+  } = req;
+  res.render(`vivr/splitpayment`, Object.assign({}, req.baseParams, {
+    title: `Rateizzazione`,
+    viewEngines: req.viewEngines,
+    viewRoots: req.viewRoots
+  }));
+});
+
+router.post('/splitpayment', checkauth, (req, res, next) => {
+  const {
+    session
+  } = req;
+  session.splitpayments = parseInt(req.body.splits);
+  if (isNaN(session.splitpayments)) {
+    session.splitpayments = 3;
+  }
+  session.splits = [];
+  const records = req.session.fullDbRecords;
+  const totalDue = records.importi.reduce((prev, curr) => {
+    return prev + curr.importoResiduo;
+  }, 0);
+  console.log('0totalDue', totalDue);
+  let total = 0;
+  for (let i = 0; i < session.splitpayments; i += 1) {
+    if (i === session.splitpayments - 1) {
+      session.splits.push(Math.ceil((totalDue-total)*100)/100);
+    } else {
+      total = total + Math.floor(totalDue/req.session.splitpayments);
+      session.splits.push(Math.floor(totalDue/req.session.splitpayments));
+    }
+  }
+
+  // console.log(session.splits);
+
+  res.render(`vivr/splitpaymentconfirm`, Object.assign({}, req.baseParams, {
+    title: `Conferma rateizzazione`,
+    viewEngines: req.viewEngines,
+    viewRoots: req.viewRoots,
+    splits: session.splits
+  }));
+});
+
+router.get('/splitpaymentconfirmed', checkauth, (req, res, next) => {
+  const {
+    session
+  } = req;
+  res.render(`vivr/splitpaymentconfirmed`, Object.assign({}, req.baseParams, {
+    title: `Conferma richiesta rateizzazione`,
+    viewEngines: req.viewEngines,
+    viewRoots: req.viewRoots
+  }));
 });
 
 export default router;

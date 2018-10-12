@@ -1,0 +1,27 @@
+<% extend 'layouts/base.ect' %>
+<div style="text-align: left">
+  <div class="card" style="">
+    <div class="card-block">
+      <h3 class="card-title text-center"><%- @title %></h3>
+      <div>
+        Siamo spiacenti, ma il codice inserito non &egrave; stato riconosciuto.
+        <br />
+        Prova ad inserire un nuovo codice.
+        <br />
+        <br />
+        <form action="/" method="GET">
+          <div class="form-group">
+            <label for="code">Codice univoco</label>
+            <input type="string" class="form-control" id="code" name="code">
+            <small id="codeHelp" class="form-text text-muted">
+              Il codice &egrave; composto di 5 caratteri (numeri e lettere) e puoi trovarlo all'interno del messaggio SMS o Email ricevuto. Ricorda che &egrave; necessario rispettare le maiuscole e minuscole.
+              <br />
+              Ad esempio, se nel messaggio avessi ricevuto un link come: <u>https://fastweb.vivr.it/<b>aTuK9</b></u>, il codice da utilizzare sarebbe: <b>aTuK9</b>.
+            </small>
+          </div>
+          <button type="submit" class="btn btn-primary" onClick="return document.getElementById('code').value ? document.getElementById('code').value.length > 0 : false">Verifica codice</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
