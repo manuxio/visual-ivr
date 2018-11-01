@@ -1,0 +1,14 @@
+patch-package
+--- a/node_modules/express/lib/application.js
++++ b/node_modules/express/lib/application.js
+@@ -569,8 +569,8 @@ app.render = function render(name, options, callback) {
+ 
+     view = new View(name, {
+       defaultEngine: this.get('view engine'),
+-      root: this.get('views'),
+-      engines: engines
++      root: renderOptions.viewRoots || this.get('views'),
++      engines: renderOptions.viewEngines || engines
+     });
+ 
+     if (!view.path) {
