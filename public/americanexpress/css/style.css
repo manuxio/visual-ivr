@@ -1,7 +1,7 @@
 /* default */
 body {
   background-color: #f2f2f2!important;
-  padding-top: 80px;
+  padding-top: 70px;
 }
 .starter-template {
   padding: 0.3rem;
@@ -30,7 +30,7 @@ body {
 }
 
 .bg-inverse {
-    background-color: #009BBA!important;
+    background-color: #455A64!important;
 }
 
 .bg-inverse-footer {

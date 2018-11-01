@@ -2,17 +2,17 @@
 <div style="text-align: left">
   <div class="card" style="">
     <div class="card-block">
-      <h3 class="card-title text-center">Scegli il metodo di pagamento</h3>
+      <h3 class="card-title text-center">Select your payment system</h3>
       <div style="margin-top: 10px; margin-bottom: 10px">
         <% if @paymentMethods.length == 1 : %>
-        Per la tua posizione &egrave; disponibile un solo metodo di pagamento, ti preghiamo di cliccare sul pulsante corrispondente per proseguire.<br />
+        For your case is available only one payment system, click on the correspondent button to proceed<br />
         <% end %>
         <% if @paymentMethods.length == 0 : %>
-        <div class="alert alert-danger">Siamo spiacenti, ma non sono disponibili metodi di pagamento.</div>
+        <div class="alert alert-danger">We apologize, for your case there isn't an available payment system</div>
         <% end %>
         <% if @paymentMethods.length > 1 : %>
-        Per la tua posizione &egrave; possibile scegliere tra diversi metodi di pagamento. Clicca su quello che preferisci.<br/>
-        <b>Ti ricordiamo che alcuni metodi di pagamento possono prevedere delle spese di commissione</b>.<br/>
+        For your case are available multiple payment option, please select one.<br/>
+        <b>A transcation fee could be charged depending on the payment system you select.</b>.<br/>
         <% end %>
       </div>
       <div id="accordion" style="margin-bottom: 10px" role="tablist" aria-multiselectable="true">

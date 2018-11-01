@@ -1,0 +1,34 @@
+<% extend 'layouts/base.ect' %>
+<div style="text-align: left">
+  <div class="card" style="">
+    <div class="card-block ">
+      <% if @pendingChecks < 5 : %>
+      <h3 class="card-title" style="text-align: center">Verifica esito</h3>
+      <div style="margin-bottom: 5px">
+        Stiamo verificando l'esito della transazione.
+        <br />
+        L'operazione potrebbe richiedere qualche minuto.
+      </div>
+      <br />
+      <h1 class="text-center" style="">
+        <i class="fa fa-spinner fa-2x fa-spin" aria-hidden="true"></i>
+      </h1>
+      <% end %>
+      <% if @pendingChecks > 5 : %>
+      <div class="alert alert-danger" style="margin-top: 0px">
+        <h3 class="card-title" style="text-align: center">Verifica esito</h3>
+        <h1 class="text-center" style="">
+          <i class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
+        </h1>
+        Abbiamo notato che la verifica sta richiedendo pi&ugrave; tempo del previsto. <br />
+        <% if @listTransactionsUrl : %>Puoi decidere di attendere ancora oppure consultare la lista delle <a href="<%- @listTransactionsUrl %>">tue transazioni cliccando qui</a>.<% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script>
+  setTimeout(function reload() {
+    location.reload();
+  }, <%- @reloadTimeout %>);
+</script>

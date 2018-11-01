@@ -1,0 +1,35 @@
+<% extend 'layouts/base.ect' %>
+<div style="text-align: left">
+  <div class="card" style="">
+    <div class="card-block">
+      <h3 class="card-title" style="text-align: center">Lista transazioni</h3>
+      <p class="card-text">
+        <% if @transactions.length < 1 : %>
+          <div class="alert alert-danger">Al momento non risultano transazioni eseguite per questa posizione.</div>
+        <% else : %>
+          <% for transaction in @transactions : %>
+          <div class="card" style="margin-bottom: 10px">
+            <div class="card-block">
+              <div class="card-text">
+                <dl class="row">
+                  <dt class="col-md-3 col-sm-5">Data</dt>
+                  <dd class="col-md-9 col-sm-7"><%- @moment(transaction.date).locale('IT').format('LLLL') %></dd>
+                  <dt class="col-md-3 col-sm-5">Importo</dt>
+                  <dd class="col-md-9 col-sm-7"><%- @formatCurrency(transaction.amount, { format: '%s%v', symbol: '&euro; ', locale: 'it-IT' }) %></dd>
+                  <dt class="col-md-3 col-sm-5">Tipo</dt>
+                  <dd class="col-md-9 col-sm-7"><%- transaction.type %></dd>
+                  <dt class="col-md-3 col-sm-5">Status</dt>
+                  <dd class="col-md-9 col-sm-7"><% if transaction.status == "APPROVED" : %><i class="fa fa-check"></i><% end %><% if transaction.status == "PENDING" : %><i class="fa fa-clock-o"></i><% end %><% if transaction.status == "NOT APPROVED" : %><i class="fa fa-exclamation"></i><% end %></dd>
+                  <dt class="col-md-3 col-sm-5">Note</dt>
+                  <dd class="col-md-9 col-sm-7"><%- transaction.remotestatus %></dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+      </p>
+    </div>
+    <%- include "includes/links.ect" %>
+  </div>
+</div>

@@ -4,15 +4,15 @@
     <div class="card-block">
       <h3 class="card-title"><%- @fullDbRecords.anagrafica.Debitore %></h3>
       <dl class="row">
-        <dt class="col-sm-3">Indirizzo</dt>
+        <dt class="col-sm-3">Address</dt>
         <dd class="col-sm-9"><%- @fullDbRecords.anagrafica.Indirizzo %></dd>
 
-        <dt class="col-sm-3">Citt&agrave;</dt>
+        <dt class="col-sm-3">City</dt>
         <dd class="col-sm-9"><%- @fullDbRecords.anagrafica.Citta %> (<%- @fullDbRecords.anagrafica.Provincia %>)</dd>
-        <dt class="col-sm-3"><% if @fullDbRecords.anagrafica.PIVA : %>Partita IVA<% else : %>Codice Fiscale<% end %></dt>
+        <dt class="col-sm-3"><% if @fullDbRecords.anagrafica.PIVA : %>VAT #<% else : %>National Sec #<% end %></dt>
         <dd class="col-sm-9"><% if @fullDbRecords.anagrafica.PIVA : %><%- @fullDbRecords.anagrafica.PIVA %><% else : %><%- @fullDbRecords.anagrafica.CodiceFiscale %><% end %></dd>
 
-        <dt class="col-sm-3">Creditore</dt>
+        <dt class="col-sm-3">Creditor</dt>
         <dd class="col-sm-9"><a href="/vivr/informazionimandato"><%- @dbRecord.nome_cliente %></a></dd>
 
       </dl>

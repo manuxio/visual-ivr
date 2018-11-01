@@ -3,27 +3,26 @@
   <div class="card" style="">
     <div class="card-block ">
       <% if @transactionResult.status == 'APPROVED' : %>
-      <h3 class="card-title" style="text-align: center">Transazione conclusa con successo</h3>
+      <h3 class="card-title" style="text-align: center">Payment completed</h3>
       <div>
-        Grazie di aver proceduto con il pagamento.<br />
-        La transazione ha avuto esito positivo e sar&agrave; contabilizzata nella tua posizione a breve.<br />
+        Thank you.<br />
+        The payment has been confirmed, the transaction will be registered in your case soon.<br />
       </div>
       <% end %>
       <% if @transactionResult.status == 'PENDING' : %>
-      <h3 class="card-title" style="text-align: center">Transazione in attesa</h3>
+      <h3 class="card-title" style="text-align: center">Pending Payment</h3>
       <div>
-        Grazie di aver proceduto con il pagamento.<br />
-        La transazione &egrave; in fase di elaborazione da parte del gestore del pagamento. Una volta verificato il buon esito dell'operazione, la transazione sar&agrave; contabilizzata nella tua posizione.<br />
+        Thank you.<br />
+		The payment gateway is elaborating your payment. Once the payment will be completed the transaction will be registered in your case.<br />
       </div>
       <% end %>
       <% if @transactionResult.status == 'NOT APPROVED' : %>
-      <h3 class="card-title" style="text-align: center">Transazione fallita</h3>
+      <h3 class="card-title" style="text-align: center">Payment Rejected</h3>
       <div>
-        Purtroppo la transazione non ha avuto buon fine.
-        La risposta ricevuta dal sistema di pagamento &egrave;:
+        It wasn't possible to process your payment.
+        For the following reason:
         <div style="margin-top: 5px" class="alert alert-warning"><%- @transactionResult.remotestatus %></div>
-        Ti preghiamo di provare nuovamente ad eseguire il pagamento online, oppure ti invitiamo a contattarci in caso di problemi con l'utilizzo di questo servizio.
-      </div>
+        Please try again or contact us in case of any problem.      </div>
       <% end %>
     </div>
     <%- include "includes/links.ect" %>

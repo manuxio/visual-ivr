@@ -2,11 +2,11 @@
 <div style="text-align: left">
   <div class="card" style="">
     <div class="card-block">
-      <h3 class="card-title" style="text-align: center">Pagamento online</h3>
+      <h3 class="card-title" style="text-align: center">Online Payment</h3>
       <p class="card-text">
-        Il pagamento online della somma di <strong><%- @formatCurrency(@dbRecord.importo, { format: '%s%v', symbol: '&euro; ', locale: 'it-IT' }) %></strong> avverr&agrave; attraverso il server sicuro gestito dall'istituto bancario <strong>BNL - GRUPPO BNP PARIBAS</strong>.<br />
-        La connessione al sito della banca sar&agrave; criptata e l'identit&agrave; del server &egrave; garantita dal certificato che il tuo programma di navigazione ti mostrer&agrave; accanto all'indirizzo web.<br />
-        Per procedere al pagamento, clicca sul pulsante qui in basso.<br />
+        The payment of the amount of <strong><%- @formatCurrency(@dbRecord.importo, { format: '%s%v', symbol: '&euro; ', locale: 'it-IT' }) %></strong> will be processed by the secured server managed by the bank institution: <strong>BNL - GRUPPO BNP PARIBAS</strong>.<br />
+        The connection to the payment gateway will be encripted and the server's identity is guaranteed by the certificate your browser will show beside the url.<br />
+        To proceed to the payment, click on the button below.<br />
         <form action="<%- @gateWay %>" method="POST">
           <input type="hidden" name="txntype" value="<%- @txntype %>">
           <input type="hidden" name="timezone" value="<%- @timezone %>">
@@ -22,7 +22,7 @@
           <input type="hidden" name="responseFailURL" value="<%- @responseSuccessURL %>">
           <input type="hidden" name="chargetotal" value="<%- @amount %>">
           <div class="form-group row">
-            <button type="submit" class="btn btn-primary">Procedi con il pagamento</button>
+            <button type="submit" class="btn btn-primary">Proceed with the payment</button>
           </div>
         </form>
       </p>

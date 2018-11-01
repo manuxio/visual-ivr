@@ -3,11 +3,11 @@
   <div class="card" style="">
     <div class="card-block ">
       <% if @pendingChecks < 5 : %>
-      <h3 class="card-title" style="text-align: center">Verifica esito</h3>
+      <h3 class="card-title" style="text-align: center">Payment Verification</h3>
       <div style="margin-bottom: 5px">
-        Stiamo verificando l'esito della transazione.
+        We are verifying the payment.
         <br />
-        L'operazione potrebbe richiedere qualche minuto.
+        The operation could take some minutes.
       </div>
       <br />
       <h1 class="text-center" style="">
@@ -16,12 +16,12 @@
       <% end %>
       <% if @pendingChecks > 5 : %>
       <div class="alert alert-danger" style="margin-top: 0px">
-        <h3 class="card-title" style="text-align: center">Verifica esito</h3>
+        <h3 class="card-title" style="text-align: center">Payment Verification</h3>
         <h1 class="text-center" style="">
           <i class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i>
         </h1>
-        Abbiamo notato che la verifica sta richiedendo pi&ugrave; tempo del previsto. <br />
-        <% if @listTransactionsUrl : %>Puoi decidere di attendere ancora oppure consultare la lista delle <a href="<%- @listTransactionsUrl %>">tue transazioni cliccando qui</a>.<% end %>
+        THe verification is taking more time than expected. <br />
+        <% if @listTransactionsUrl : %>You can choose if wait a little bit more or check the list of <a href="<%- @listTransactionsUrl %>">your payments by clicking here</a>.<% end %>
       </div>
       <% end %>
     </div>

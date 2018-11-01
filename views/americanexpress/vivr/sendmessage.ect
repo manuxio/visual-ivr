@@ -2,41 +2,42 @@
 <div style="text-align: left">
   <div class="card" style="">
     <div class="card-block ">
-      <h3 class="card-title" style="text-align: center">Invia messaggio</h3>
+      <h3 class="card-title" style="text-align: center">Send a Message</h3>
       <% if @formError : %>
         <div class="alert alert-danger">
-          Si sono verificati i seguenti errori:
+          The following error as occured:
           <%- @formError %>
         </div>
       <% end %>
       <form action="/vivr/sendmessage" method="POST" enctype="multipart/form-data">
         <div class="form-group">
-          <label for="contactReason">Oggetto</label>
+          <label for="contactReason">Subject</label>
           <select name="contactReason" class="form-control" id="contactReason">
-            <option value="">Seleziona l'oggetto</option>
-            <option value="Problemi di accesso" <% if @contactReason == "Problemi di accesso" :%>selected<% end %>>Problemi di accesso</option>
-            <option value="Problemi con il pagamento" <% if @contactReason == "Problemi con il pagamento" :%>selected<% end %>>Problemi con il pagamento</option>
-            <option value="Anagrafica errata" <% if @contactReason == "Anagrafica errata" :%>selected<% end %>>Anagrafica errata</option>
-            <option value="Posizione debitoria errata" <% if @contactReason == "Posizione debitoria errata" :%>selected<% end %>>Posizione debitoria errata</option>
-            <option value="Invio documentazione" <% if @contactReason == "Invio documentazione" :%>selected<% end %>>Invio documentazione</option>
-            <option value="Altro" <% if @contactReason == "Altro" :%>selected<% end %>>Altro</option>
+            <option value="">Select subject</option>
+            <option value="Payment proof" <% if @contactReason == "Payment proof" :%>selected<% end %>>Send proof of payment</option>
+            <!-- <option value="Problemi di accesso" <% if @contactReason == "Problemi di accesso" :%>selected<% end %>>Access Problem</option>
+            <option value="Problemi con il pagamento" <% if @contactReason == "Problemi con il pagamento" :%>selected<% end %>>Payment Problems</option>
+            <option value="Anagrafica errata" <% if @contactReason == "Anagrafica errata" :%>selected<% end %>>Wrong Personal Data</option>
+            <option value="Posizione debitoria errata" <% if @contactReason == "Posizione debitoria errata" :%>selected<% end %>>Wrong Case</option>
+            <option value="Invio documentazione" <% if @contactReason == "Invio documentazione" :%>selected<% end %>>Send Documentation</option> -->
+            <option value="Altro" <% if @contactReason == "Altro" :%>selected<% end %>>Other</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="contactMessage">Messaggio</label>
+          <label for="contactMessage">Message</label>
           <textarea class="form-control" name="contactMessage" id="contactMessage" rows="6"><%- @contactMessage %></textarea>
         </div>
         <div class="form-group">
-          <label for="contactAttachment">Allegato - dimensione massima 500KB</label>
+          <label for="contactAttachment">Attachment - max weight 500KB</label>
           <input type="file" class="form-control-file" name="contactAttachment" id="contactAttachment" aria-describedby="fileHelp">
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-primary">Invia messaggio</button>
+          <button type="submit" class="btn btn-primary">Send Message</button>
         </div>
       </form>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><a href="/vivr/home"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Torna alla home</a></li>
+      <li class="list-group-item"><a href="/vivr/home"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Back to Home</a></li>
     </ul>
   </div>
 </div>

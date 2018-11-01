@@ -2,17 +2,17 @@
 <div style="text-align: left">
   <div class="card" style="">
     <div class="card-block">
-      <h3 class="card-title">Rateizzazione</h3>
-      <div>Verifica le condizioni del piano di rateizzazione e conferma la richiesta</div>
+      <h3 class="card-title">Payment Plan</h3>
+      <div>Verify the condition of your payment plan and confirm the request</div>
       <div>
         <ul>
           <% n = 0 %>
           <% for split in @splits : %>
-            <li>Rata n. <%- ++n %>, <%- @formatCurrency(split, { format: '%s%v', symbol: '&euro; ', locale: 'it-IT' }) %></li>
+            <li>Instalment n. <%- ++n %>, <%- @formatCurrency(split, { format: '%s%v', symbol: '&euro; ', locale: 'it-IT' }) %></li>
           <% end %>
         </ul>
         <div class="text-center">
-          <a href="/vivr/splitpaymentconfirmed" class="btn btn-primary">Conferma richiesta</a>
+          <a href="/vivr/splitpaymentconfirmed" class="btn btn-primary">Confirm</a>
         </div>
       </div>
     </div>

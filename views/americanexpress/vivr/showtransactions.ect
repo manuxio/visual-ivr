@@ -2,10 +2,10 @@
 <div style="text-align: left">
   <div class="card" style="">
     <div class="card-block">
-      <h3 class="card-title" style="text-align: center">Lista transazioni</h3>
+      <h3 class="card-title" style="text-align: center">Payment List</h3>
       <p class="card-text">
         <% if @transactions.length < 1 : %>
-          <div class="alert alert-danger">Al momento non risultano transazioni eseguite per questa posizione.</div>
+          <div class="alert alert-danger">For this case there aren't payments yet</div>
         <% else : %>
           <% for transaction in @transactions : %>
           <div class="card" style="margin-bottom: 10px">

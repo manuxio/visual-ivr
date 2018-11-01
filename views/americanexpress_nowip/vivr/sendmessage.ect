@@ -1,0 +1,42 @@
+<% extend 'layouts/base.ect' %>
+<div style="text-align: left">
+  <div class="card" style="">
+    <div class="card-block ">
+      <h3 class="card-title" style="text-align: center">Invia messaggio</h3>
+      <% if @formError : %>
+        <div class="alert alert-danger">
+          Si sono verificati i seguenti errori:
+          <%- @formError %>
+        </div>
+      <% end %>
+      <form action="/vivr/sendmessage" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="contactReason">Oggetto</label>
+          <select name="contactReason" class="form-control" id="contactReason">
+            <option value="">Seleziona l'oggetto</option>
+            <option value="Problemi di accesso" <% if @contactReason == "Problemi di accesso" :%>selected<% end %>>Problemi di accesso</option>
+            <option value="Problemi con il pagamento" <% if @contactReason == "Problemi con il pagamento" :%>selected<% end %>>Problemi con il pagamento</option>
+            <option value="Anagrafica errata" <% if @contactReason == "Anagrafica errata" :%>selected<% end %>>Anagrafica errata</option>
+            <option value="Posizione debitoria errata" <% if @contactReason == "Posizione debitoria errata" :%>selected<% end %>>Posizione debitoria errata</option>
+            <option value="Invio documentazione" <% if @contactReason == "Invio documentazione" :%>selected<% end %>>Invio documentazione</option>
+            <option value="Altro" <% if @contactReason == "Altro" :%>selected<% end %>>Altro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="contactMessage">Messaggio</label>
+          <textarea class="form-control" name="contactMessage" id="contactMessage" rows="6"><%- @contactMessage %></textarea>
+        </div>
+        <div class="form-group">
+          <label for="contactAttachment">Allegato - dimensione massima 500KB</label>
+          <input type="file" class="form-control-file" name="contactAttachment" id="contactAttachment" aria-describedby="fileHelp">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Invia messaggio</button>
+        </div>
+      </form>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><a href="/vivr/home"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Torna alla home</a></li>
+    </ul>
+  </div>
+</div>
